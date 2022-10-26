@@ -85,9 +85,10 @@ def pregunta_03():
     # Cree una instancia del analizador de palabras (build_analyzer)
     analyzer = CountVectorizer(analyzer= 'word', token_pattern= r"(?u)\b[a-zA-Z][a-zA-Z]+\b", lowercase=True)
     analyzer=analyzer.build_analyzer()
+    analyzer=analyzer.apply(lambda x: (stemmer.stem(w) for w in analyzer(x)))
 
     # Retorne el analizador de palabras
-    return lambda x: (stemmer.stem(w) for w in analyzer(x))
+    return analyzer
 
 
 def pregunta_04():
