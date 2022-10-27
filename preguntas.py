@@ -118,9 +118,9 @@ def pregunta_04():
         analyzer= analyzer,
         lowercase=True,
         stop_words="english",
-        token_pattern= r"(?u)\[a-zA-z]+",
+        token_pattern= "[a-zA-z]+",
         binary=True,
-        max_df=1,
+        max_df=1.0,
         min_df=5,
     )
 
@@ -177,7 +177,7 @@ def pregunta_05():
         y_pred=gridSearchCV.predict(X_train),
     )
 
-    cfm_test = ____(
+    cfm_test = confusion_matrix(
         y_true=y_test,
         y_pred=gridSearchCV.predict( X_test),
     )
@@ -196,11 +196,11 @@ def pregunta_06():
     gridSearchCV = pregunta_04()
 
     # Cargue los datos generados en la pregunta 01.
-    _, _, X_untagged, _ = pregunta_01()
+    x_tagged, y_tagged, x_untagged, y_untagged = pregunta_01()
 
     # pronostique la polaridad del sentimiento para los datos
     # no etiquetados
-    y_untagged_pred = gridSearchCV.predict(X_untagged)
+    y_untagged_pred = gridSearchCV.predict(x_untagged)
 
     # Retorne el vector de predicciones
     return y_untagged_pred
