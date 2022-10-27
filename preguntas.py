@@ -97,10 +97,6 @@ def pregunta_04():
     -------------------------------------------------------------------------------------
     """
 
-    # Importe CountVetorizer
-    # Importe GridSearchCV
-    # Importe Pipeline
-    # Importe BernoulliNB
     from sklearn.feature_extraction.text import CountVectorizer
     from sklearn.model_selection import GridSearchCV 
     from sklearn.pipeline import Pipeline
@@ -122,7 +118,7 @@ def pregunta_04():
         analyzer= analyzer,
         lowercase=True,
         stop_words="english",
-        token_pattern= r"(?u)\b[a-zA-Z][a-zA-Z]+\b",
+        token_pattern= r"(?u)\[a-zA-z]+",
         binary=True,
         max_df=1,
         min_df=5,
