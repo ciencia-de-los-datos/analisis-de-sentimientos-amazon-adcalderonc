@@ -77,17 +77,17 @@ def pregunta_03():
     # Importe CountVectorizer
     from sklearn.feature_extraction.text import CountVectorizer
     from nltk.stem.porter import PorterStemmer
- 
+   
+    def building_word_analyzer():
+        # Cree un stemeer que use el algoritmo de Porter.
+        stemmer = PorterStemmer()
 
-    # Cree un stemeer que use el algoritmo de Porter.
-    stemmer = PorterStemmer()
-
-    # Cree una instancia del analizador de palabras (build_analyzer)
-    analyzer = CountVectorizer(analyzer= 'word', token_pattern= r"(?u)\b[a-zA-Z][a-zA-Z]+\b", lowercase=True)
-    analyzer=analyzer.build_analyzer()
-    analyzer=analyzer.apply(lambda x: (stemmer.stem(w) for w in analyzer(x)))
-
-    # Retorne el analizador de palabras
+        # Cree una instancia del analizador de palabras (build_analyzer)
+        analyzer = CountVectorizer(analyzer= 'word', token_pattern= r"(?u)\b[a-zA-Z][a-zA-Z]+\b", lowercase=True)
+        analyzer=analyzer.build_analyzer()
+        return lambda x: (stemmer.stem(w) for w in analyzer(x))
+        # Retorne el analizador de palabras
+    analyzer= building_word_analyzer()
     return analyzer
 
 
@@ -200,11 +200,11 @@ def pregunta_06():
     gridSearchCV = pregunta_04()
 
     # Cargue los datos generados en la pregunta 01.
-    x_tagged, y_tagged, x_untagged, y_untagged = pregunta_01()
+    _, _, X_untagged, _ = pregunta_01()
 
     # pronostique la polaridad del sentimiento para los datos
     # no etiquetados
-    y_untagged_pred = gridSearchCV.predict(x_untagged)
+    y_untagged_pred = gridSearchCV.predict(X_untagged)
 
     # Retorne el vector de predicciones
     return y_untagged_pred
