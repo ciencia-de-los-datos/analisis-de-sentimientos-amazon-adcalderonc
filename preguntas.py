@@ -78,17 +78,16 @@ def pregunta_03():
     from sklearn.feature_extraction.text import CountVectorizer
     from nltk.stem.porter import PorterStemmer
    
-    def building_word_analyzer():
+ 
         # Cree un stemeer que use el algoritmo de Porter.
-        stemmer = PorterStemmer()
+    stemmer = PorterStemmer()
 
         # Cree una instancia del analizador de palabras (build_analyzer)
-        analyzer = CountVectorizer(analyzer= 'word', token_pattern= r"(?u)\b[a-zA-Z][a-zA-Z]+\b", lowercase=True)
-        analyzer=analyzer.build_analyzer()
-        return lambda x: (stemmer.stem(w) for w in analyzer(x))
+    vectorizer = CountVectorizer()
+    analyzer=vectorizer.build_analyzer()
+
         # Retorne el analizador de palabras
-    analyzer= building_word_analyzer()
-    return analyzer
+    return lambda x: (stemmer.stem(w) for w in analyzer(x))
 
 
 def pregunta_04():
